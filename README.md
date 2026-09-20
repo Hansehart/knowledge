@@ -31,4 +31,4 @@ the repository by walking up from where it was run, looking for a `knowledge/` d
 | `knowledge/model/terms.ttl` | SKOS | the vocabulary and acronyms the domain's documents use |
 | `knowledge/zotero/library.json` | Zotero | a backup of every source and its metadata |
 | `knowledge/zotero/collections.json` | Zotero | a backup of how the library is organised |
-| `knowledge/zotero/governance.yml` | — | the rules the library follows |
+| `knowledge/zotero/governance.yml` | N/A | the rules the library follows |

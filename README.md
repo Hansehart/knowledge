@@ -22,10 +22,11 @@ knowledge
 
 ## The repository it works on
 One repository holds one domain, and one collection in the library holds its sources. `knowledge` finds
-the repository by walking up from where it was run, looking for a `knowledge/` directory.
+the repository by walking up from where it was run, looking for `knowledge/config.toml`.
 
 | Path | Vocabulary | Description |
 |---|---|---|
+| `knowledge/config.toml` | N/A | what the domain is called, and the namespace its ids are minted under |
 | `knowledge/model/entities.ttl` | schema.org | who and what the domain is made of, and how they relate |
 | `knowledge/model/topics.ttl` | SKOS | the controlled vocabulary that tags the sources |
 | `knowledge/model/terms.ttl` | SKOS | the vocabulary and acronyms the domain's documents use |

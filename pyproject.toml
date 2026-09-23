@@ -1,0 +1,85 @@
+[project]
+name = "knowledge"
+version = "0.1.0"
+description = "A command line for one knowledge base: capture a source, name a topic, relate a thing"
+readme = "README.md"
+authors = [
+    { name = "Hansehart", email = "97880342+Hansehart@users.noreply.github.com" }
+]
+requires-python = ">=3.13"
+dependencies = []
+
+[project.scripts]
+knowledge = "knowledge.__main__:main"
+
+[build-system]
+requires = ["uv_build>=0.12.17,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "mypy==2.3.1",
+    "pre-commit==4.6.2",
+    "pytest==9.1.1",
+    "ruff==0.16.8",
+]
+
+[tool.ruff]
+line-length = 128
+
+[tool.ruff.lint]
+select = ["ALL"]  # strict-by-default; every exception is recorded in `ignore` below
+ignore = [
+    # --- Group 1: formatter conflicts (ruff format owns whitespace/quotes/commas) ---
+    "W191", "E111", "E114", "E117",          # indentation
+    "D206", "D300",                          # docstring indentation / quote style
+    "Q000", "Q001", "Q002", "Q003", "Q004",  # quote style
+    "COM812", "COM819",                      # trailing commas
+    "ISC002",                                # multi-line implicit string concat
+
+    # --- Group 2: docstring convention contradictions (pep257 keeps D211/D212) ---
+    "D203",  # blank line before class docstring - contradicts D211
+    "D213",  # multi-line summary on 2nd line - contradicts D212
+
+    # --- Group 3: intentional in this codebase ---
+    "CPY001",  # the licence is stated once, in LICENSE
+    "T201",    # a command prints what it found on purpose
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"  # curates the D-rule subset; pairs with D203/D213 in ignore
+
+[tool.ruff.lint.mccabe]
+max-complexity = 12
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.pytest.ini_options]
+# importlib keeps sys.path untouched, so a test module's name comes from its path and
+# two directories may hold files of the same name
+addopts = "--import-mode=importlib"
+testpaths = ["tests"]
+
+[tool.mypy]
+python_executable = ".venv/bin/python"
+strict = true
+warn_unreachable = true
+extra_checks = true
+enable_error_code = [
+    "explicit-override",     # every override must use @override
+    "possibly-undefined",    # variable maybe-unset on some path
+    "redundant-expr",        # dead / always-constant expressions
+    "redundant-self",        # a Self annotation the signature already implies
+    "truthy-bool",           # always-true conditions
+    "truthy-iterable",       # an Iterable in a condition, which a generator makes always-true
+    "ignore-without-code",   # `# type: ignore` must name a code
+    "unused-ignore",         # suppression no longer applies
+    "unused-awaitable",      # an awaitable whose result is dropped
+    "deprecated",            # use of @deprecated APIs
+    "mutable-override",      # a mutable attribute overriding an immutable one
+    "unimported-reveal",     # a reveal_type left behind from debugging
+    "exhaustive-match",      # a match that leaves a case unhandled
+    "explicit-any",          # Any written out, rather than a type that says what it holds
+    "no-any-unimported",     # Any arriving from a module with no stubs
+]

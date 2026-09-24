@@ -60,16 +60,16 @@ testpaths = ["tests"]
 [tool.mypy]
 python_executable = ".venv/bin/python"
 strict = true
-# the strictness `strict` leaves off; each has a flag because the check runs only when it is set
+# the strictness added on top of `strict`; each has a flag, because the check runs when it is set
 warn_unreachable = true
 warn_unused_configs = true
-disallow_any_explicit = true    # Any written out, rather than a type that says what it holds
-disallow_any_unimported = true  # Any arriving from a module with no stubs
+disallow_any_explicit = true    # Any written out where a type could say what it holds
+disallow_any_unimported = true  # Any arriving from a module whose stubs are missing
 enable_error_code = [
     "deprecated",            # use of a @deprecated API
     "exhaustive-match",      # a match that leaves a case unhandled
     "explicit-override",     # an override that omits @override
-    "ignore-without-code",   # a `# type: ignore` that names no code
+    "ignore-without-code",   # a `# type: ignore` missing its error code
     "mutable-override",      # a mutable attribute overriding an immutable one
     "possibly-undefined",    # a variable that some path leaves unset
     "redundant-expr",        # an expression whose value is already settled

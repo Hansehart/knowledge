@@ -1,5 +1,11 @@
 repos:
-  # Whitespace, syntax and size, for every file rather than the Python ones alone.
+  # The file both tools are configured by, checked against the packaging schemas.
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: 4b2e70d08cb2ccd26d1fba73588de41c7a5d50b7  # frozen: v0.25
+    hooks:
+      - id: validate-pyproject
+
+  # Whitespace, syntax and size, across every file in the repository.
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
     hooks:
@@ -31,4 +37,4 @@ repos:
         entry: uv run mypy src
         language: system
         types: [python]
-        pass_filenames: false  # mypy checks the whole package, so the staged names are left off
+        pass_filenames: false  # mypy checks the whole package

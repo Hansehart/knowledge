@@ -1,6 +1,14 @@
 # knowledge
 A command line for one knowledge base: capture a source, name a topic, relate a thing.
 
+## Layers
+- **Discovery**: finds what is worth reading.
+  - **Monitor**: a passive process that gathers new information.
+- **Sources**: keeps what was found, in the library.
+  - **Inbox**: whatever is found is saved immediately and can be processed whenever.
+- **Knowledge**: says what it means and how it connects.
+  - **Notes**: single ideas in one's own words, linked to what is already there.
+
 ## Commands
 ```
 knowledge

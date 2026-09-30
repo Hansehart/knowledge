@@ -3,14 +3,23 @@ A command line for one knowledge base: process a source, name a topic, relate a 
 
 ## Layers
 - **Discovery**: finds what is worth reading.
-  - **Inbox**: whatever is found is saved immediately and can be processed whenever.
-    - **CLI**: identifiers and open pages, added from the terminal.
-    - **Connector**: pages behind a login, added from the browser.
-    - **Monitor**: new work found by saved searches, added automatically.
+
+  <details><summary><strong>Inbox</strong>: whatever is found is saved immediately and can be processed whenever.</summary>
+
+  - **CLI**: identifiers and open pages, added from the terminal.
+  - **Connector**: pages behind a login, added from the browser.
+  - **Monitor**: new work found by saved searches, added automatically.
+    - Zotero > File > New Feed > From URL
+
+  </details>
+
 - **Sources**: keeps what was found, in the library.
-  - **Archive**: sources that were processed and kept.
+
+  <details><summary><strong>Archive</strong>: sources that were processed and kept.</summary></details>
+
 - **Knowledge**: says what it means and how it connects.
-  - **Notes**: single ideas in one's own words, linked to what is already there.
+
+  <details><summary><strong>Notes</strong>: single ideas in one's own words, linked to what is already there.</summary></details>
 
 ## Commands
 ```

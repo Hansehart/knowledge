@@ -7,6 +7,7 @@ A command line for one knowledge base: process a source, name a topic, relate a 
     - **CLI**: identifiers and open pages, added from the terminal.
     - **Connector**: pages behind a login, added from the browser.
     - **Monitor**: new work found by saved searches, added automatically.
+      - Zotero > File > New Feed > From URL
 - **Sources**: keeps what was found, in the library.
   - **Archive**: sources that were processed and kept.
 - **Knowledge**: says what it means and how it connects.

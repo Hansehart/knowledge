@@ -1,4 +1,4 @@
-# Rules the knowledge base must follow, checked by SHACL before anything is written.
+# Rules the knowledge base must follow, checked before anything is written.
 
 @prefix hansehart:    <https://data.hansehart.de/def/> .
 @prefix rdf:          <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -6,7 +6,7 @@
 @prefix shacl:        <http://www.w3.org/ns/shacl#> .
 @prefix zotero:       <http://www.zotero.org/namespaces/export#> .
 
-# UserItemShape is a set of rules that applies to every Zotero item.
+# A set of rules that applies to every Zotero item.
 hansehart:UserItemShape
     rdf:type           shacl:NodeShape ;
     shacl:targetClass  zotero:UserItem ;
@@ -18,7 +18,7 @@ hansehart:UserItemShape
         shacl:maxCount  1
     ] .
 
-# SourceShape is a set of rules that applies to everything a Zotero item points to.
+# A set of rules that applies to everything a Zotero item points to.
 hansehart:SourceShape
     rdf:type               shacl:NodeShape ;
     shacl:targetObjectsOf  resourcelist:resource ;

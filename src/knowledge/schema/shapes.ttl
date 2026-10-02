@@ -1,0 +1,30 @@
+# Rules the knowledge base must follow, checked by SHACL before anything is written.
+
+@prefix hansehart:    <https://data.hansehart.de/def/> .
+@prefix rdf:          <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix resourcelist: <http://purl.org/vocab/resourcelist/schema#> .
+@prefix shacl:        <http://www.w3.org/ns/shacl#> .
+@prefix zotero:       <http://www.zotero.org/namespaces/export#> .
+
+# UserItemShape is a set of rules that applies to every Zotero item.
+hansehart:UserItemShape
+    rdf:type           shacl:NodeShape ;
+    shacl:targetClass  zotero:UserItem ;
+    # A Zotero item points to exactly one source, by its name.
+    shacl:property [
+        shacl:path      resourcelist:resource ;
+        shacl:nodeKind  shacl:IRI ;
+        shacl:minCount  1 ;
+        shacl:maxCount  1
+    ] .
+
+# SourceShape is a set of rules that applies to everything a Zotero item points to.
+hansehart:SourceShape
+    rdf:type               shacl:NodeShape ;
+    shacl:targetObjectsOf  resourcelist:resource ;
+    # A source is pointed to by exactly one Zotero item.
+    shacl:property [
+        shacl:path      [ shacl:inversePath resourcelist:resource ] ;
+        shacl:minCount  1 ;
+        shacl:maxCount  1
+    ] .

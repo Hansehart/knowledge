@@ -1,4 +1,1 @@
 # Invented examples in the real formats.
-
-@prefix item:   <http://zotero.org/users/0/items/> .
-@prefix source: <https://data.hansehart.de/id/source/> .

@@ -6,7 +6,7 @@ import pytest
 from pyshacl import validate
 from rdflib import Graph
 
-SHAPES = Graph().parse(data=files("knowledge").joinpath("schema/shapes.ttl").read_text(), format="turtle")
+SHAPES = Graph().parse(data=files("knowledge").joinpath("schema/shapes.ttl").read_text(encoding="utf-8"), format="turtle")
 
 PREFIXES = """
 @prefix resourcelist: <http://purl.org/vocab/resourcelist/schema#> .

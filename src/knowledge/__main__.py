@@ -1,7 +1,7 @@
 """Name the commands and hand each one the arguments it was given.
 
-The work lives elsewhere; this module decides only what was asked for. Keeping the two apart is what lets
-a command be tested by calling it, rather than by driving a process and reading what it printed.
+This module reads the command line and calls the matching command, which lives in a module of its own.
+A test can then call a command's function with its arguments and check what it returns.
 """
 
 

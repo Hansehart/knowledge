@@ -17,7 +17,7 @@ repos:
       - id: check-yaml
       - id: check-added-large-files
 
-  # Runs the ruff and mypy pinned in pyproject, so tool versions have one source of truth.
+  # Runs the checks at the versions pinned with the project, so tool versions have one source of truth.
   - repo: local
     hooks:
       - id: ruff-check

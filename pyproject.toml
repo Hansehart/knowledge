@@ -1,7 +1,7 @@
 [project]
 name = "knowledge"
 version = "0.1.0"
-description = "A command line for one knowledge base: capture a source, name a topic, relate a thing"
+description = "A command line for one knowledge base: process a source, name a topic, relate a thing"
 readme = "README.md"
 authors = [
     { name = "Hansehart", email = "97880342+Hansehart@users.noreply.github.com" }
@@ -42,7 +42,7 @@ ignore = [
     "ISC002",                                # multi-line implicit string concat
 
     # --- Group 2: intentional in this codebase ---
-    "CPY001",  # the licence is stated once, in LICENSE
+    "CPY001",  # the licence is stated once, for the whole repository
     "T201",    # output is printed on purpose
 ]
 

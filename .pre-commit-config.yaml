@@ -34,7 +34,14 @@ repos:
 
       - id: mypy
         name: mypy (strict)
-        entry: uv run mypy src
+        entry: uv run mypy src tests
         language: system
         types: [python]
-        pass_filenames: false  # mypy checks the whole package
+        pass_filenames: false  # mypy checks the whole package and its tests
+
+      - id: uv-lock
+        name: uv lock (check)
+        entry: uv lock --check
+        language: system
+        files: ^(pyproject\.toml|uv\.lock)$
+        pass_filenames: false  # the lock file is checked against the project as a whole

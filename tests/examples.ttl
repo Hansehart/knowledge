@@ -1,0 +1,4 @@
+# Example things the tests are built from: invented, in the real formats.
+
+@prefix item:   <http://zotero.org/users/0/items/> .
+@prefix source: <https://data.hansehart.de/id/source/> .

@@ -1,6 +1,7 @@
 """Check that the rules accept what is valid and reject what is not."""
 
 from importlib.resources import files
+from pathlib import Path
 
 import pytest
 from pyshacl import validate
@@ -8,18 +9,17 @@ from rdflib import Graph
 
 SHAPES = Graph().parse(data=files("knowledge").joinpath("schema/shapes.ttl").read_text(encoding="utf-8"), format="turtle")
 
-# The example things every case is built from: invented, in the real formats.
+EXAMPLES = (Path(__file__).parent / "examples.ttl").read_text(encoding="utf-8")
+
 PREFIXES = """
-@prefix item:         <http://zotero.org/users/0/items/> .
 @prefix resourcelist: <http://purl.org/vocab/resourcelist/schema#> .
-@prefix source:       <https://data.hansehart.de/id/source/> .
 @prefix zotero:       <http://www.zotero.org/namespaces/export#> .
 """
 
 
 def conforms(data: str) -> bool:
     """Tell whether the given data follows every rule."""
-    graph = Graph().parse(data=PREFIXES + data, format="turtle")
+    graph = Graph().parse(data=EXAMPLES + PREFIXES + data, format="turtle")
     result = validate(graph, shacl_graph=SHAPES)
     return bool(result[0])
 

@@ -23,32 +23,32 @@ def conforms(data: str) -> bool:
     ("data", "expected"),
     [
         pytest.param(
-            """<http://zotero.org/users/0/items/AAAAAAAA>
+            """item:AAAAAAAA
                    a zotero:UserItem ;
-                   <http://purl.org/vocab/resourcelist/schema#resource> <https://data.hansehart.de/id/source/example-one> .""",
+                   resourcelist:resource source:example-one .""",
             True,
             id="one item points to one source",
         ),
         pytest.param(
-            """<http://zotero.org/users/0/items/AAAAAAAA>
+            """item:AAAAAAAA
                    a zotero:UserItem ;
-                   <http://purl.org/vocab/resourcelist/schema#resource> <https://data.hansehart.de/id/source/example-one> ,
-                                                                        <https://data.hansehart.de/id/source/example-two> .""",
+                   resourcelist:resource source:example-one ,
+                                         source:example-two .""",
             False,
             id="one item points to two sources",
         ),
         pytest.param(
-            """<http://zotero.org/users/0/items/AAAAAAAA>
+            """item:AAAAAAAA
                    a zotero:UserItem ;
-                   <http://purl.org/vocab/resourcelist/schema#resource> <https://data.hansehart.de/id/source/example-one> .
-               <http://zotero.org/users/0/items/BBBBBBBB>
+                   resourcelist:resource source:example-one .
+               item:BBBBBBBB
                    a zotero:UserItem ;
-                   <http://purl.org/vocab/resourcelist/schema#resource> <https://data.hansehart.de/id/source/example-one> .""",
+                   resourcelist:resource source:example-one .""",
             False,
             id="two items point to the same source",
         ),
         pytest.param(
-            """<http://zotero.org/users/0/items/AAAAAAAA>
+            """item:AAAAAAAA
                    a zotero:UserItem .""",
             False,
             id="an item points to no source",

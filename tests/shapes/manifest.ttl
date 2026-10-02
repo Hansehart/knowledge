@@ -4,5 +4,5 @@
 
 <>
     rdf:type          manifest:Manifest ;
-    rdfs:label        "Rules for Zotero items and their sources" ;
+    rdfs:label        "Rules for sources and Zotero items" ;
     manifest:include  <no-source.ttl> , <one-source.ttl> , <shared-source.ttl> , <two-sources.ttl> .

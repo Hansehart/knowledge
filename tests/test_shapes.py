@@ -1,60 +1,46 @@
-"""Check that the rules accept what is valid and reject what is not."""
+"""Check that the rules accept what is valid and reject what is not, in the W3C test format."""
 
-from importlib.resources import files
 from pathlib import Path
 
 import pytest
 from pyshacl import validate
-from rdflib import Graph
+from pyshacl.validator_conformance import check_sht_result
+from rdflib import BNode, Graph, Namespace, URIRef
+from rdflib.collection import Collection
+from rdflib.namespace import RDFS
+from rdflib.term import Node
 
-SHAPES = Graph().parse(data=files("knowledge").joinpath("schema/shapes.ttl").read_text(encoding="utf-8"), format="turtle")
-
-EXAMPLES = (Path(__file__).parent / "examples.ttl").read_text(encoding="utf-8")
-
-
-def conforms(data: str) -> bool:
-    """Tell whether the given data follows every rule."""
-    graph = Graph().parse(data=EXAMPLES + data, format="turtle")
-    result = validate(graph, shacl_graph=SHAPES)
-    return bool(result[0])
+MANIFEST = Namespace("http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#")
+SHACLTEST = Namespace("http://www.w3.org/ns/shacl-test#")
 
 
-@pytest.mark.parametrize(
-    ("data", "expected"),
-    [
-        pytest.param(
-            """item:AAAAAAAA
-                   a zotero:UserItem ;
-                   resourcelist:resource source:example-one .""",
-            True,
-            id="one item points to one source",
-        ),
-        pytest.param(
-            """item:AAAAAAAA
-                   a zotero:UserItem ;
-                   resourcelist:resource source:example-one ,
-                                         source:example-two .""",
-            False,
-            id="one item points to two sources",
-        ),
-        pytest.param(
-            """item:AAAAAAAA
-                   a zotero:UserItem ;
-                   resourcelist:resource source:example-one .
-               item:BBBBBBBB
-                   a zotero:UserItem ;
-                   resourcelist:resource source:example-one .""",
-            False,
-            id="two items point to the same source",
-        ),
-        pytest.param(
-            """item:AAAAAAAA
-                   a zotero:UserItem .""",
-            False,
-            id="an item points to no source",
-        ),
-    ],
-)
-def test_rules(data: str, *, expected: bool) -> None:
-    """Each example is accepted or rejected as the rules intend."""
-    assert conforms(data) is expected
+def load(location: Node | None) -> Graph:
+    """Read the graph found at the given location."""
+    return Graph().parse(str(location), format="turtle")
+
+
+def collect() -> list[tuple[Graph, Node]]:
+    """Collect every case the manifest includes."""
+    manifest = load(URIRef((Path(__file__).parent / "shapes" / "manifest.ttl").as_uri()))
+    return [
+        (tests, entry)
+        for include in sorted(manifest.objects(None, MANIFEST.include), key=str)
+        for tests in [load(include)]
+        for entries in tests.objects(None, MANIFEST.entries)
+        for entry in Collection(tests, entries)
+    ]
+
+
+CASES = collect()
+
+
+@pytest.mark.parametrize(("tests", "entry"), CASES, ids=[str(tests.value(entry, RDFS.label)) for tests, entry in CASES])
+def test_rules(tests: Graph, entry: Node) -> None:
+    """Each case ends with exactly the result it expects."""
+    action = tests.value(entry, MANIFEST.action)
+    data = load(tests.value(action, SHACLTEST.dataGraph))
+    shapes = load(tests.value(action, SHACLTEST.shapesGraph))
+    expected = tests.value(entry, MANIFEST.result)
+    assert isinstance(expected, URIRef | BNode)
+    _, report, _ = validate(data, shacl_graph=shapes)
+    assert check_sht_result(report, tests, expected)

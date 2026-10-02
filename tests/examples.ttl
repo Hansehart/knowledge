@@ -1,6 +1,0 @@
-# Invented examples in the real formats.
-
-@prefix item:         <http://zotero.org/users/0/items/> .
-@prefix resourcelist: <http://purl.org/vocab/resourcelist/schema#> .
-@prefix source:       <https://data.hansehart.de/id/source/> .
-@prefix zotero:       <http://www.zotero.org/namespaces/export#> .

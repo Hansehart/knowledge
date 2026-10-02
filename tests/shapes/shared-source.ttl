@@ -23,7 +23,7 @@
 <shared-source>
     rdf:type         shacltest:Validate ;
     rdfs:label       "Two items point to the same source" ;
-    manifest:action  [ shacltest:dataGraph <> ; shacltest:shapesGraph <../../src/knowledge/schema/shapes.ttl> ] ;
+    manifest:action  [ shacltest:dataGraph <> ; shacltest:shapesGraph hansehart:shapes ] ;
     manifest:result  [
         rdf:type        shacl:ValidationReport ;
         shacl:conforms  "false"^^xsd:boolean ;

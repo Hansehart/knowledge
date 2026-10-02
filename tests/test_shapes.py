@@ -1,5 +1,6 @@
 """Check that the rules accept valid data and reject invalid data."""
 
+from importlib.resources import files
 from pathlib import Path
 
 import pytest
@@ -12,10 +13,14 @@ from rdflib.term import Node
 
 MANIFEST = Namespace("http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#")
 SHACLTEST = Namespace("http://www.w3.org/ns/shacl-test#")
+RULES = URIRef("https://data.hansehart.de/def/shapes")
 
 
 def load(location: Node | None) -> Graph:
-    """Read the graph found at the given location."""
+    """Read the graph found at the given location, or the rules the package ships."""
+    if location == RULES:
+        rules = files("knowledge").joinpath("schema/shapes.ttl").read_text(encoding="utf-8")
+        return Graph().parse(data=rules, format="turtle")
     return Graph().parse(str(location), format="turtle")
 
 

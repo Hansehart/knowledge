@@ -19,7 +19,7 @@
 <one-source>
     rdf:type         shacltest:Validate ;
     rdfs:label       "One item points to one source" ;
-    manifest:action  [ shacltest:dataGraph <> ; shacltest:shapesGraph <../../src/knowledge/schema/shapes.ttl> ] ;
+    manifest:action  [ shacltest:dataGraph <> ; shacltest:shapesGraph hansehart:shapes ] ;
     manifest:result  [
         rdf:type        shacl:ValidationReport ;
         shacl:conforms  "true"^^xsd:boolean

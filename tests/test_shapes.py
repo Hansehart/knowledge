@@ -24,14 +24,14 @@ def conforms(data: str) -> bool:
     [
         pytest.param(
             """<http://zotero.org/users/0/items/AAAAAAAA>
-                   a <http://www.zotero.org/namespaces/export#UserItem> ;
+                   a zotero:UserItem ;
                    <http://purl.org/vocab/resourcelist/schema#resource> <https://data.hansehart.de/id/source/example-one> .""",
             True,
             id="one item points to one source",
         ),
         pytest.param(
             """<http://zotero.org/users/0/items/AAAAAAAA>
-                   a <http://www.zotero.org/namespaces/export#UserItem> ;
+                   a zotero:UserItem ;
                    <http://purl.org/vocab/resourcelist/schema#resource> <https://data.hansehart.de/id/source/example-one> ,
                                                                         <https://data.hansehart.de/id/source/example-two> .""",
             False,
@@ -39,17 +39,17 @@ def conforms(data: str) -> bool:
         ),
         pytest.param(
             """<http://zotero.org/users/0/items/AAAAAAAA>
-                   a <http://www.zotero.org/namespaces/export#UserItem> ;
+                   a zotero:UserItem ;
                    <http://purl.org/vocab/resourcelist/schema#resource> <https://data.hansehart.de/id/source/example-one> .
                <http://zotero.org/users/0/items/BBBBBBBB>
-                   a <http://www.zotero.org/namespaces/export#UserItem> ;
+                   a zotero:UserItem ;
                    <http://purl.org/vocab/resourcelist/schema#resource> <https://data.hansehart.de/id/source/example-one> .""",
             False,
             id="two items point to the same source",
         ),
         pytest.param(
             """<http://zotero.org/users/0/items/AAAAAAAA>
-                   a <http://www.zotero.org/namespaces/export#UserItem> .""",
+                   a zotero:UserItem .""",
             False,
             id="an item points to no source",
         ),

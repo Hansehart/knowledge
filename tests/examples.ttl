@@ -1,1 +1,3 @@
 # Invented examples in the real formats.
+
+@prefix zotero: <http://www.zotero.org/namespaces/export#> .

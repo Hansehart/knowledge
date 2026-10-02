@@ -1,4 +1,4 @@
-# Invented example things the tests are built from, in the real formats.
+# Invented examples in the real formats.
 
 @prefix item:   <http://zotero.org/users/0/items/> .
 @prefix source: <https://data.hansehart.de/id/source/> .

@@ -1,7 +1,6 @@
-"""Name the commands and hand each one the arguments it was given.
+"""Read the command line and run the command it names.
 
-This module reads the command line and calls the matching command, which lives in a module of its own.
-A test can then call a command's function with its arguments and check what it returns.
+Each command lives in a module of its own and is called with the arguments given here.
 """
 
 

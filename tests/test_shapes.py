@@ -1,4 +1,4 @@
-"""Check that the rules in shapes.ttl accept what is valid and reject what is not."""
+"""Check that the rules accept what is valid and reject what is not."""
 
 from importlib.resources import files
 
@@ -15,7 +15,7 @@ PREFIXES = """
 
 
 def conforms(data: str) -> bool:
-    """Tell whether the given Turtle data follows every rule."""
+    """Tell whether the given data follows every rule."""
     graph = Graph().parse(data=PREFIXES + data, format="turtle")
     result = validate(graph, shacl_graph=SHAPES)
     return bool(result[0])

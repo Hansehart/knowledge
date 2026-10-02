@@ -1,4 +1,4 @@
-"""Check that the rules accept what is valid and reject what is not, in the W3C test format."""
+"""Check that the rules accept what is valid and reject what is not."""
 
 from pathlib import Path
 

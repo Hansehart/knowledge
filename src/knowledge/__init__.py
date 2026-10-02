@@ -1,6 +1,6 @@
-"""Work on one knowledge base: process a source, name a topic, relate a thing.
+"""Turn any kind of source into checked and connected knowledge.
 
-A knowledge base is a repository holding what one person knows, beside a backup of the library its sources
-come from. Both are text, reviewed in a diff and versioned with everything else, and this package is what
-writes them so that neither has to be edited by hand.
+Papers, posts, pages and every other source in the library become part of one person's knowledge base,
+connected to what is already there, and every change is checked against the rules of that base before
+it is written.
 """

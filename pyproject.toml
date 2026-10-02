@@ -29,6 +29,7 @@ dev = [
 
 [tool.ruff]
 line-length = 128
+namespace-packages = ["tests"]  # tests are imported by their path
 
 [tool.ruff.lint]
 select = ["ALL"]  # strict-by-default; every exception is recorded in `ignore` below
@@ -44,6 +45,9 @@ ignore = [
     "CPY001",  # the licence is stated once, for the whole repository
     "T201",    # output is printed on purpose
 ]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]  # pytest checks with assert
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"  # curates the D-rule subset, D203 and D213 among them

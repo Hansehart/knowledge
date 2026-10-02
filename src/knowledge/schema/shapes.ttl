@@ -10,21 +10,25 @@
 hansehart:UserItemShape
     rdf:type           shacl:NodeShape ;
     shacl:targetClass  zotero:UserItem ;
-    # A Zotero item points to exactly one source, by its name.
-    shacl:property [
-        shacl:path      resourcelist:resource ;
-        shacl:nodeKind  shacl:IRI ;
-        shacl:minCount  1 ;
-        shacl:maxCount  1
-    ] .
+    shacl:property     hansehart:UserItemShape-resource .
+
+# A Zotero item points to exactly one source, by its name.
+hansehart:UserItemShape-resource
+    rdf:type        shacl:PropertyShape ;
+    shacl:path      resourcelist:resource ;
+    shacl:nodeKind  shacl:IRI ;
+    shacl:minCount  1 ;
+    shacl:maxCount  1 .
 
 # A set of rules that applies to everything a Zotero item points to.
 hansehart:SourceShape
     rdf:type               shacl:NodeShape ;
     shacl:targetObjectsOf  resourcelist:resource ;
-    # A source is pointed to by exactly one Zotero item.
-    shacl:property [
-        shacl:path      [ shacl:inversePath resourcelist:resource ] ;
-        shacl:minCount  1 ;
-        shacl:maxCount  1
-    ] .
+    shacl:property         hansehart:SourceShape-resource .
+
+# A source is pointed to by exactly one Zotero item.
+hansehart:SourceShape-resource
+    rdf:type        shacl:PropertyShape ;
+    shacl:path      [ shacl:inversePath resourcelist:resource ] ;
+    shacl:minCount  1 ;
+    shacl:maxCount  1 .

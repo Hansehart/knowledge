@@ -1,5 +1,6 @@
 """Turn any kind of source into connected and typed knowledge.
 
-Papers, posts, pages and every other source in the library become part of one person's knowledge base,
-connected to entities and every change is checked against the rules of that base before it is written.
+Each source becomes a node in one person's knowledge base, linked to entities. Every statement follows
+the rules of that base, so the whole stays consistent as it grows. The result is plain, versioned text
+that other tools can read and show.
 """

@@ -8,8 +8,11 @@ from rdflib import Graph
 
 SHAPES = Graph().parse(data=files("knowledge").joinpath("schema/shapes.ttl").read_text(encoding="utf-8"), format="turtle")
 
+# The example things every case is built from: invented, in the real formats.
 PREFIXES = """
+@prefix item:         <http://zotero.org/users/0/items/> .
 @prefix resourcelist: <http://purl.org/vocab/resourcelist/schema#> .
+@prefix source:       <https://data.hansehart.de/id/source/> .
 @prefix zotero:       <http://www.zotero.org/namespaces/export#> .
 """
 
@@ -25,28 +28,23 @@ def conforms(data: str) -> bool:
     ("data", "expected"),
     [
         pytest.param(
-            """<http://zotero.org/users/1/items/AAAAAAAA> a zotero:UserItem ;
-                   resourcelist:resource <https://data.hansehart.de/id/source/one> .""",
+            "item:AAAAAAAA a zotero:UserItem ; resourcelist:resource source:example-one .",
             True,
             id="one item points to one source",
         ),
         pytest.param(
-            """<http://zotero.org/users/1/items/AAAAAAAA> a zotero:UserItem ;
-                   resourcelist:resource <https://data.hansehart.de/id/source/one> ,
-                                         <https://data.hansehart.de/id/source/two> .""",
+            "item:AAAAAAAA a zotero:UserItem ; resourcelist:resource source:example-one , source:example-two .",
             False,
             id="one item points to two sources",
         ),
         pytest.param(
-            """<http://zotero.org/users/1/items/AAAAAAAA> a zotero:UserItem ;
-                   resourcelist:resource <https://data.hansehart.de/id/source/one> .
-               <http://zotero.org/users/1/items/BBBBBBBB> a zotero:UserItem ;
-                   resourcelist:resource <https://data.hansehart.de/id/source/one> .""",
+            """item:AAAAAAAA a zotero:UserItem ; resourcelist:resource source:example-one .
+               item:BBBBBBBB a zotero:UserItem ; resourcelist:resource source:example-one .""",
             False,
             id="two items point to the same source",
         ),
         pytest.param(
-            """<http://zotero.org/users/1/items/AAAAAAAA> a zotero:UserItem .""",
+            "item:AAAAAAAA a zotero:UserItem .",
             False,
             id="an item points to no source",
         ),

@@ -1,4 +1,4 @@
-"""Check that the rules accept what is valid and reject what is not."""
+"""Check that the rules accept valid data and reject invalid data."""
 
 from pathlib import Path
 

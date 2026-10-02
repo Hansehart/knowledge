@@ -29,7 +29,7 @@ dev = [
 
 [tool.ruff]
 line-length = 128
-namespace-packages = ["tests"]  # tests run in importlib mode, without __init__.py
+namespace-packages = ["tests"]  # tests are imported by their path
 
 [tool.ruff.lint]
 select = ["ALL"]  # strict-by-default; every exception is recorded in `ignore` below

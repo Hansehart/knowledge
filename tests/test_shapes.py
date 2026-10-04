@@ -17,7 +17,14 @@ SHACLTEST = Namespace("http://www.w3.org/ns/shacl-test#")
 
 
 def load(location: Node | None) -> Graph:
-    """Read the graph found at the given location, or the rules the package ships."""
+    """Read the graph found at the given location, or the rules the package ships.
+
+    Args:
+        location: Where the graph is, or the name of the rules the package ships.
+
+    Returns:
+        The graph read from that location.
+    """
     if location == RULES:
         rules = files("knowledge").joinpath("schema/shapes.ttl").read_text(encoding="utf-8")
         return Graph().parse(data=rules, format="turtle")
@@ -25,7 +32,11 @@ def load(location: Node | None) -> Graph:
 
 
 def collect() -> list[tuple[Graph, Node]]:
-    """Collect every case the manifest includes."""
+    """Collect every case the manifest includes.
+
+    Returns:
+        One pair per case, the graph that describes it and the case itself.
+    """
     manifest = load(URIRef((Path(__file__).parent / "shapes" / "manifest.ttl").as_uri()))
     return [
         (tests, entry)
@@ -41,7 +52,12 @@ CASES = collect()
 
 @pytest.mark.parametrize(("tests", "entry"), CASES, ids=[str(tests.value(entry, RDFS.label)) for tests, entry in CASES])
 def test_rules(tests: Graph, entry: Node) -> None:
-    """Each case ends with exactly the result it expects."""
+    """Each case ends with exactly the result it expects.
+
+    Args:
+        tests: The graph that describes the case.
+        entry: The case to run.
+    """
     action = tests.value(entry, MANIFEST.action)
     data = load(tests.value(action, SHACLTEST.dataGraph))
     shapes = load(tests.value(action, SHACLTEST.shapesGraph))

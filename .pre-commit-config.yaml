@@ -15,34 +15,35 @@ repos:
   # Checks at the versions pinned with the project, so each tool has one source of truth.
   - repo: local
     hooks:
+      - id: uv-lock
+        name: uv lock (check)
+        entry: uv lock --check
+        language: unsupported
+        always_run: true
+        fail_fast: true
+        pass_filenames: false  # the lock file is checked against the project as a whole
+
       - id: validate-pyproject
         name: validate-pyproject
-        entry: uv run --locked validate-pyproject
+        entry: uv run validate-pyproject
         language: unsupported
         files: ^pyproject\.toml$
 
       - id: ruff-check
         name: ruff check
-        entry: uv run --locked ruff check --fix
+        entry: uv run ruff check --fix
         language: unsupported
         types: [python]
 
       - id: ruff-format
         name: ruff format
-        entry: uv run --locked ruff format
+        entry: uv run ruff format
         language: unsupported
         types: [python]
 
       - id: mypy
         name: mypy (strict)
-        entry: uv run --locked mypy src tests
+        entry: uv run mypy src tests
         language: unsupported
         types: [python]
         pass_filenames: false  # mypy checks the whole package and its tests
-
-      - id: uv-lock
-        name: uv lock (check)
-        entry: uv lock --check
-        language: unsupported
-        files: ^(pyproject\.toml|uv\.lock)$
-        pass_filenames: false  # the lock file is checked against the project as a whole

@@ -45,5 +45,4 @@ repos:
         name: mypy
         entry: uv run mypy src tests
         language: unsupported
-        types: [python]
         pass_filenames: false

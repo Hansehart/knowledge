@@ -81,7 +81,6 @@ testpaths = ["tests"]
 
 [tool.mypy]
 files = ["src", "tests"]
-python_executable = ".venv/bin/python"
 strict = true
 # Checks beyond strict, each switched on by its own setting.
 warn_unreachable = true

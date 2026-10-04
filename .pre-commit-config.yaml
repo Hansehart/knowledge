@@ -21,7 +21,7 @@ repos:
         language: unsupported
         always_run: true
         fail_fast: true
-        pass_filenames: false  # the lock file is checked against the project as a whole
+        pass_filenames: false
 
       - id: validate-pyproject
         name: validate-pyproject
@@ -46,4 +46,4 @@ repos:
         entry: uv run mypy src tests
         language: unsupported
         types: [python]
-        pass_filenames: false  # mypy checks the whole package and its tests
+        pass_filenames: false

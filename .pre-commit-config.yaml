@@ -25,21 +25,22 @@ repos:
 
       - id: validate-pyproject
         name: validate-pyproject
-        entry: uv run validate-pyproject
+        entry: uv run validate-pyproject pyproject.toml
         language: unsupported
-        files: ^pyproject\.toml$
+        files: ^(pyproject\.toml|uv\.lock)$
+        pass_filenames: false
 
       - id: ruff-check
         name: ruff check
         entry: uv run ruff check --fix
         language: unsupported
-        types: [python]
+        pass_filenames: false
 
       - id: ruff-format
         name: ruff format
         entry: uv run ruff format
         language: unsupported
-        types: [python]
+        pass_filenames: false
 
       - id: mypy
         name: mypy

@@ -58,10 +58,11 @@ max-complexity = 10
 [tool.ruff.format]
 docstring-code-format = true
 
-[tool.pytest.ini_options]
+[tool.pytest]
+strict = true
 # importlib keeps sys.path untouched, so a test module's name comes from its path and
 # two directories may hold files of the same name
-addopts = "--import-mode=importlib"
+addopts = ["--import-mode=importlib"]
 testpaths = ["tests"]
 
 [tool.mypy]

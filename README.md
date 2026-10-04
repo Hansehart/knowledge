@@ -33,3 +33,9 @@ the repository by walking up from where it was run, looking for `knowledge/confi
 | `knowledge/zotero/library.json` | Zotero | a backup of every source and its metadata |
 | `knowledge/zotero/collections.json` | Zotero | a backup of how the library is organised |
 | `knowledge/zotero/governance.yml` | N/A | the rules the library follows |
+
+## Development
+Run once per clone, so every commit is checked first.
+```shell
+uv run --locked pre-commit install --install-hooks
+```

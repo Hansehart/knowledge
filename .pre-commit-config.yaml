@@ -21,7 +21,6 @@ repos:
         name: uv lock
         entry: uv lock --check
         language: unsupported
-        always_run: true
         pass_filenames: false
 
       - id: validate-pyproject

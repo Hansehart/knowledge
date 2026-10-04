@@ -12,10 +12,9 @@ repos:
       - id: no-commit-to-branch
       - id: trailing-whitespace
 
-  # Runs the checks at the versions pinned with the project, so tool versions have one source of truth.
+  # Checks at the versions pinned with the project, so each tool has one source of truth.
   - repo: local
     hooks:
-      # The project file, checked against the packaging schemas and those of each tool it configures.
       - id: validate-pyproject
         name: validate-pyproject
         entry: uv run validate-pyproject

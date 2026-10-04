@@ -12,8 +12,8 @@ from rdflib.namespace import RDFS
 from rdflib.term import Node
 
 MANIFEST = Namespace("http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#")
-SHACLTEST = Namespace("http://www.w3.org/ns/shacl-test#")
 RULES = URIRef("https://data.hansehart.de/def/shapes")
+SHACLTEST = Namespace("http://www.w3.org/ns/shacl-test#")
 
 
 def load(location: Node | None) -> Graph:

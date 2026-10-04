@@ -25,6 +25,8 @@ dev = [
     "pre-commit==4.6.2",
     "pytest==9.1.1",
     "ruff==0.16.8",
+    "validate-pyproject-schema-store==2026.10.2",
+    "validate-pyproject[all]==0.26",
 ]
 
 [tool.ruff]

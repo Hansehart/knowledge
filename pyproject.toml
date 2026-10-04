@@ -32,7 +32,7 @@ line-length = 128
 namespace-packages = ["tests"]  # tests are imported by their path
 
 [tool.ruff.lint]
-select = ["ALL"]  # strict-by-default; every exception is recorded in `ignore` below
+select = ["ALL", "D401"]  # every rule, and the docstring opens with a command
 ignore = [
     # --- Group 1: formatter conflicts (ruff format owns whitespace/quotes/commas) ---
     "W191", "E111", "E114", "E117",          # indentation
@@ -50,7 +50,7 @@ ignore = [
 "tests/**" = ["S101"]  # pytest checks with assert
 
 [tool.ruff.lint.pydocstyle]
-convention = "pep257"  # curates the D-rule subset, D203 and D213 among them
+convention = "google"  # curates the D-rule subset, D203 and D213 among them
 
 [tool.ruff.lint.mccabe]
 max-complexity = 10

@@ -52,13 +52,13 @@ namespace-packages = ["tests"]  # tests are imported by their path
 [tool.ruff.lint]
 select = ["ALL", "D401"]  # every rule, and the docstring opens with a command
 ignore = [
-    # --- Group 1: formatter conflicts (ruff format owns whitespace/quotes/commas) ---
+    # Rules the formatter already decides.
     "W191", "E111", "E114", "E117",          # indentation
-    "D206", "D300",                          # docstring indentation / quote style
+    "D206", "D300",                          # docstring indentation and quote style
     "Q000", "Q001", "Q002", "Q003", "Q004",  # quote style
     "COM812", "COM819",                      # trailing commas
 
-    # --- Group 2: intentional in this codebase ---
+    # Rules this project departs from on purpose.
     "CPY001",  # the licence is stated once, for the whole repository
     "T201",    # output is printed on purpose
 ]
@@ -68,9 +68,6 @@ ignore = [
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"  # curates the D-rule subset, D203 and D213 among them
-
-[tool.ruff.lint.mccabe]
-max-complexity = 10
 
 [tool.ruff.format]
 docstring-code-format = true
@@ -86,7 +83,7 @@ testpaths = ["tests"]
 files = ["src", "tests"]
 python_executable = ".venv/bin/python"
 strict = true
-# the strictness added on top of `strict`; each has a flag, because the check runs when it is set
+# Checks beyond strict, each switched on by its own setting.
 warn_unreachable = true
 warn_unused_configs = true
 disallow_any_explicit = true    # Any written out where a type could say what it holds

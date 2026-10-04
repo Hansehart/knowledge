@@ -44,6 +44,7 @@ required-version = ">=0.12.17,<0.13"
 [tool.ruff]
 line-length = 128
 namespace-packages = [ "tests" ]  # tests are imported by their path
+cache-dir = ".cache/ruff"
 format.docstring-code-format = true
 lint.select = [ "ALL", "D401" ]  # every rule, and the docstring opens with a command
 lint.ignore = [
@@ -78,6 +79,7 @@ max_supported_python = "3.13"
 [tool.mypy]
 files = [ "src", "tests" ]
 strict = true
+cache_dir = ".cache/mypy"
 # Group: checks beyond strict, each switched on by its own setting
 disallow_any_unimported = true  # Any arriving from a module whose stubs are missing
 disallow_any_explicit = true  # Any written out where a type could say what it holds
@@ -102,5 +104,6 @@ warn_unused_configs = true
 # importlib keeps sys.path untouched, so a test module's name comes from its path and
 # two directories may hold files of the same name
 addopts = [ "--import-mode=importlib" ]
+cache_dir = ".cache/pytest"
 strict = true
 testpaths = [ "tests" ]

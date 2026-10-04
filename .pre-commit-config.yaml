@@ -17,25 +17,25 @@ repos:
     hooks:
       - id: validate-pyproject
         name: validate-pyproject
-        entry: uv run validate-pyproject
+        entry: uv run --locked validate-pyproject
         language: unsupported
         files: ^pyproject\.toml$
 
       - id: ruff-check
         name: ruff check
-        entry: uv run ruff check --fix
+        entry: uv run --locked ruff check --fix
         language: unsupported
         types: [python]
 
       - id: ruff-format
         name: ruff format
-        entry: uv run ruff format
+        entry: uv run --locked ruff format
         language: unsupported
         types: [python]
 
       - id: mypy
         name: mypy (strict)
-        entry: uv run mypy src tests
+        entry: uv run --locked mypy src tests
         language: unsupported
         types: [python]
         pass_filenames: false  # mypy checks the whole package and its tests

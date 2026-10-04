@@ -49,5 +49,5 @@ the repository by walking up from where it was run, looking for `knowledge/confi
 ## Development
 Run once per clone, so every commit is checked first.
 ```shell
-uv run --locked pre-commit install --install-hooks
+uv run pre-commit install --install-hooks
 ```

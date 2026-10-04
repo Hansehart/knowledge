@@ -1,3 +1,5 @@
+fail_fast: true
+
 repos:
   # Checks for every file and commit, whatever the language.
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -20,7 +22,6 @@ repos:
         entry: uv lock --check
         language: unsupported
         always_run: true
-        fail_fast: true
         pass_filenames: false
 
       - id: validate-pyproject

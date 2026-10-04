@@ -18,31 +18,31 @@ repos:
       - id: validate-pyproject
         name: validate-pyproject
         entry: uv run validate-pyproject
-        language: system
+        language: unsupported
         files: ^pyproject\.toml$
 
       - id: ruff-check
         name: ruff check
         entry: uv run ruff check --fix
-        language: system
+        language: unsupported
         types: [python]
 
       - id: ruff-format
         name: ruff format
         entry: uv run ruff format
-        language: system
+        language: unsupported
         types: [python]
 
       - id: mypy
         name: mypy (strict)
         entry: uv run mypy src tests
-        language: system
+        language: unsupported
         types: [python]
         pass_filenames: false  # mypy checks the whole package and its tests
 
       - id: uv-lock
         name: uv lock (check)
         entry: uv lock --check
-        language: system
+        language: unsupported
         files: ^(pyproject\.toml|uv\.lock)$
         pass_filenames: false  # the lock file is checked against the project as a whole

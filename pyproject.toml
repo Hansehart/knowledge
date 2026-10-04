@@ -1,8 +1,10 @@
 [project]
 name = "knowledge"
 version = "0.1.0"
-description = "A command line for one knowledge base: process a source, name a topic, relate a thing"
+description = "Turn any kind of source into connected and typed knowledge"
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [
     { name = "Hansehart", email = "97880342+Hansehart@users.noreply.github.com" }
 ]

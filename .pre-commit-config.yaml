@@ -14,6 +14,12 @@ repos:
       - id: no-commit-to-branch
       - id: trailing-whitespace
 
+  # The project file, written in one canonical order.
+  - repo: https://github.com/tox-dev/pyproject-fmt
+    rev: 831e544b60ed0c00a8dc7932528790dc8b410fac  # frozen: v2.30.0
+    hooks:
+      - id: pyproject-fmt
+
   # Checks at the versions pinned with the project, so each tool has one source of truth.
   - repo: local
     hooks:

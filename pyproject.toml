@@ -1,13 +1,16 @@
+[build-system]
+build-backend = "uv_build"
+requires = [ "uv-build>=0.12.17,<0.13.0" ]
+
 [project]
 name = "knowledge"
 version = "0.1.0"
 description = "Turn any kind of source into connected and typed knowledge"
 readme = "README.md"
 license = "MIT"
-license-files = ["LICENSE"]
-authors = [
-    { name = "Hansehart", email = "97880342+Hansehart@users.noreply.github.com" }
-]
+license-files = [ "LICENSE" ]
+authors = [ { name = "Hansehart", email = "97880342+Hansehart@users.noreply.github.com" } ]
+requires-python = ">=3.13"
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Environment :: Console",
@@ -19,18 +22,11 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Information Analysis",
     "Typing :: Typed",
 ]
-requires-python = ">=3.13"
 dependencies = [
     "pyshacl==0.40.1",
     "rdflib==7.6.0",
 ]
-
-[project.scripts]
-knowledge = "knowledge.cli:main"
-
-[build-system]
-requires = ["uv_build>=0.12.17,<0.13.0"]
-build-backend = "uv_build"
+scripts.knowledge = "knowledge.cli:main"
 
 [dependency-groups]
 dev = [
@@ -38,8 +34,8 @@ dev = [
     "pre-commit==4.6.2",
     "pytest==9.1.1",
     "ruff==0.16.8",
-    "validate-pyproject-schema-store==2026.10.2",
     "validate-pyproject[all]==0.26",
+    "validate-pyproject-schema-store==2026.10.2",
 ]
 
 [tool.uv]
@@ -47,57 +43,64 @@ required-version = ">=0.12.17,<0.13"
 
 [tool.ruff]
 line-length = 128
-namespace-packages = ["tests"]  # tests are imported by their path
+namespace-packages = [ "tests" ]  # tests are imported by their path
+format.docstring-code-format = true
+lint.select = [ "ALL", "D401" ]  # every rule, and the docstring opens with a command
+lint.ignore = [
+    # Group: rules the formatter already decides
+    "COM812",
+    "COM819",
+    "D206",
+    "D300",
+    "E111",
+    "E114",
+    "E117",
+    "Q000",
+    "Q001",
+    "Q002",
+    "Q003",
+    "Q004",
+    "W191",
 
-[tool.ruff.lint]
-select = ["ALL", "D401"]  # every rule, and the docstring opens with a command
-ignore = [
-    # Rules the formatter already decides.
-    "W191", "E111", "E114", "E117",          # indentation
-    "D206", "D300",                          # docstring indentation and quote style
-    "Q000", "Q001", "Q002", "Q003", "Q004",  # quote style
-    "COM812", "COM819",                      # trailing commas
-
-    # Rules this project departs from on purpose.
-    "CPY001",  # the licence is stated once, for the whole repository
-    "T201",    # output is printed on purpose
+    # Group: rules this project departs from on purpose
+    "CPY001", # the licence is stated once, for the whole repository
+    "T201",   # output is printed on purpose
 ]
+lint.per-file-ignores."tests/**" = [ "S101" ]  # pytest checks with assert
+lint.pydocstyle.convention = "google"  # curates the D-rule subset, D203 and D213 among them
 
-[tool.ruff.lint.per-file-ignores]
-"tests/**" = ["S101"]  # pytest checks with assert
-
-[tool.ruff.lint.pydocstyle]
-convention = "google"  # curates the D-rule subset, D203 and D213 among them
-
-[tool.ruff.format]
-docstring-code-format = true
-
-[tool.pytest]
-strict = true
-# importlib keeps sys.path untouched, so a test module's name comes from its path and
-# two directories may hold files of the same name
-addopts = ["--import-mode=importlib"]
-testpaths = ["tests"]
+[tool.pyproject-fmt]
+column_width = 128
+indent = 4
+keep_full_version = true
+max_supported_python = "3.13"
 
 [tool.mypy]
-files = ["src", "tests"]
+files = [ "src", "tests" ]
 strict = true
-# Checks beyond strict, each switched on by its own setting.
-warn_unreachable = true
-warn_unused_configs = true
-disallow_any_explicit = true    # Any written out where a type could say what it holds
+# Group: checks beyond strict, each switched on by its own setting
 disallow_any_unimported = true  # Any arriving from a module whose stubs are missing
+disallow_any_explicit = true  # Any written out where a type could say what it holds
+warn_unreachable = true
 enable_error_code = [
-    "deprecated",            # use of a @deprecated API
-    "exhaustive-match",      # a match that leaves a case unhandled
-    "explicit-override",     # an override that omits @override
-    "ignore-without-code",   # a `# type: ignore` missing its error code
-    "mutable-override",      # a mutable attribute overriding an immutable one
-    "possibly-undefined",    # a variable that some path leaves unset
-    "redundant-expr",        # an expression whose value is already settled
-    "redundant-self",        # a Self annotation the signature already implies
-    "truthy-bool",           # a condition that is always true
-    "truthy-iterable",       # an Iterable in a condition, which a generator makes always true
-    "unimported-reveal",     # a reveal_type left behind from debugging
-    "unused-awaitable",      # an awaitable whose result is dropped
+    "deprecated",          # use of a @deprecated API
+    "exhaustive-match",    # a match that leaves a case unhandled
+    "explicit-override",   # an override that omits @override
+    "ignore-without-code", # a `# type: ignore` missing its error code
+    "mutable-override",    # a mutable attribute overriding an immutable one
+    "possibly-undefined",  # a variable that some path leaves unset
+    "redundant-expr",      # an expression whose value is already settled
+    "redundant-self",      # a Self annotation the signature already implies
+    "truthy-bool",         # a condition that is always true
+    "truthy-iterable",     # an Iterable in a condition, which a generator makes always true
+    "unimported-reveal",   # a reveal_type left behind from debugging
+    "unused-awaitable",    # an awaitable whose result is dropped
 ]
+warn_unused_configs = true
+
+[tool.pytest]
+# importlib keeps sys.path untouched, so a test module's name comes from its path and
+# two directories may hold files of the same name
+addopts = [ "--import-mode=importlib" ]
+strict = true
+testpaths = [ "tests" ]

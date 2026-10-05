@@ -1,4 +1,5 @@
 # Copyright (c) 2026 Hansehart
+# SPDX-License-Identifier: MIT
 """Read the command line and run the command it names.
 
 Each command lives in a module of its own and is called with the arguments given here.

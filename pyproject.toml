@@ -49,7 +49,7 @@ lint.select = [ "ALL" ]
 lint.extend-select = [ "D400", "D401", "D404" ]  # Google style, narrowed to one form wherever it allows several
 lint.ignore = [ "COM812" ]  # the formatter already decides trailing commas
 lint.per-file-ignores."tests/**" = [ "INP001", "S101" ]  # tests are imported by their path and use asserts
-lint.flake8-copyright.author = "Hansehart"
+lint.flake8-copyright.notice-rgx = "Copyright \\(c\\) \\d{4} Hansehart\\n# SPDX-License-Identifier: MIT\\n"
 lint.pydocstyle.convention = "google"  # curates the D-rule subset, D203 and D213 among them
 
 [tool.pyproject-fmt]

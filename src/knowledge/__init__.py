@@ -1,5 +1,6 @@
 # Copyright (c) 2026 Hansehart
 # SPDX-License-Identifier: MIT
+
 """Turn any kind of source into connected and typed knowledge.
 
 Each source becomes a node in one person's knowledge base and is linked to entities. Every statement

@@ -1,5 +1,6 @@
 # Copyright (c) 2026 Hansehart
 # SPDX-License-Identifier: MIT
+
 """Check that the rules accept valid data and reject invalid data."""
 
 import pathlib

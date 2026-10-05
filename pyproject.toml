@@ -54,7 +54,7 @@ lint.ignore = [
     # Group: rules this project departs from on purpose
     "CPY001", # the licence is stated once, for the whole repository
 ]
-lint.per-file-ignores."tests/**" = [ "INP001", "S101" ]  # pytest imports tests by their path and checks with assert
+lint.per-file-ignores."tests/**" = [ "INP001", "S101" ]  # tests are imported by their path and use asserts
 lint.pydocstyle.convention = "google"  # curates the D-rule subset, D203 and D213 among them
 
 [tool.pyproject-fmt]

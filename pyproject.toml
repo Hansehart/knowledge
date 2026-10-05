@@ -47,14 +47,9 @@ cache-dir = ".cache/ruff"
 format.docstring-code-format = true
 lint.select = [ "ALL" ]
 lint.extend-select = [ "D400", "D401", "D404" ]  # Google style, narrowed to one form wherever it allows several
-lint.ignore = [
-    # Group: rules the formatter already decides
-    "COM812",
-
-    # Group: rules this project departs from on purpose
-    "CPY001", # the licence is stated once, for the whole repository
-]
+lint.ignore = [ "COM812" ]  # the formatter already decides trailing commas
 lint.per-file-ignores."tests/**" = [ "INP001", "S101" ]  # tests are imported by their path and use asserts
+lint.flake8-copyright.author = "Hansehart"
 lint.pydocstyle.convention = "google"  # curates the D-rule subset, D203 and D213 among them
 
 [tool.pyproject-fmt]

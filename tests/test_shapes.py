@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Hansehart
 """Check that the rules accept valid data and reject invalid data."""
 
 import pathlib

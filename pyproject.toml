@@ -50,22 +50,9 @@ lint.extend-select = [ "D400", "D401", "D404" ]  # Google style, narrowed to one
 lint.ignore = [
     # Group: rules the formatter already decides
     "COM812",
-    "COM819",
-    "D206",
-    "D300",
-    "E111",
-    "E114",
-    "E117",
-    "Q000",
-    "Q001",
-    "Q002",
-    "Q003",
-    "Q004",
-    "W191",
 
     # Group: rules this project departs from on purpose
     "CPY001", # the licence is stated once, for the whole repository
-    "T201",   # output is printed on purpose
 ]
 lint.per-file-ignores."tests/**" = [ "INP001", "S101" ]  # pytest imports tests by their path and checks with assert
 lint.pydocstyle.convention = "google"  # curates the D-rule subset, D203 and D213 among them

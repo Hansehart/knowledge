@@ -43,7 +43,6 @@ required-version = ">=0.12.17,<0.13"
 
 [tool.ruff]
 line-length = 128
-namespace-packages = [ "tests" ]  # tests are imported by their path
 cache-dir = ".cache/ruff"
 format.docstring-code-format = true
 lint.select = [ "ALL", "D401" ]  # every rule, and the docstring opens with a command
@@ -67,7 +66,7 @@ lint.ignore = [
     "CPY001", # the licence is stated once, for the whole repository
     "T201",   # output is printed on purpose
 ]
-lint.per-file-ignores."tests/**" = [ "S101" ]  # pytest checks with assert
+lint.per-file-ignores."tests/**" = [ "INP001", "S101" ]  # pytest imports tests by their path and checks with assert
 lint.pydocstyle.convention = "google"  # curates the D-rule subset, D203 and D213 among them
 
 [tool.pyproject-fmt]

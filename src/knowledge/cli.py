@@ -1,4 +1,4 @@
-# Copyright (c) 2026 Hansehart
+# SPDX-FileCopyrightText: Copyright (c) 2026 Hansehart
 # SPDX-License-Identifier: MIT
 
 """Read the command line and run the command it names.

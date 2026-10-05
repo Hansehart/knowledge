@@ -1,4 +1,4 @@
-# Copyright (c) 2026 Hansehart
+# SPDX-FileCopyrightText: Copyright (c) 2026 Hansehart
 # SPDX-License-Identifier: MIT
 
 """Turn any kind of source into connected and typed knowledge.

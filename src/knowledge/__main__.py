@@ -1,4 +1,4 @@
-# Copyright (c) 2026 Hansehart
+# SPDX-FileCopyrightText: Copyright (c) 2026 Hansehart
 # SPDX-License-Identifier: MIT
 
 """Run the command line when the package is started as a module."""

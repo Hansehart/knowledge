@@ -1,0 +1,49 @@
+@prefix hansehart:    <https://data.hansehart.de/def/> .
+@prefix manifest:     <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix rdf:          <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:         <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix resourcelist: <http://purl.org/vocab/resourcelist/schema#> .
+@prefix shacl:        <http://www.w3.org/ns/shacl#> .
+@prefix shacltest:    <http://www.w3.org/ns/shacl-test#> .
+@prefix xsd:          <http://www.w3.org/2001/XMLSchema#> .
+@prefix zotero:       <http://www.zotero.org/namespaces/export#> .
+
+<http://zotero.org/users/0/items/AAAAAAAA>
+    rdf:type               zotero:UserItem ;
+    resourcelist:resource  <https://data.hansehart.de/id/source/example-one> .
+
+<http://zotero.org/users/0/items/CCCCCCCC>
+    rdf:type               zotero:UserItem ;
+    resourcelist:resource  <https://data.hansehart.de/id/source/example-one> .
+
+<https://data.hansehart.de/id/source/example-one>
+    zotero:itemType  "journalArticle" .
+
+<http://zotero.org/users/0/items/BBBBBBBB>
+    rdf:type               zotero:UserItem ;
+    resourcelist:resource  <https://data.hansehart.de/id/source/example-two> .
+
+<https://data.hansehart.de/id/source/example-two>
+    zotero:itemType  "journalArticle" .
+
+<>
+    rdf:type          manifest:Manifest ;
+    manifest:entries  ( <maxCount-001> ) .
+
+<maxCount-001>
+    rdf:type         shacltest:Validate ;
+    rdfs:label       "Two items point to the same source" ;
+    manifest:action  [ shacltest:dataGraph <> ; shacltest:shapesGraph hansehart:shapes ] ;
+    manifest:result  [
+        rdf:type        shacl:ValidationReport ;
+        shacl:conforms  "false"^^xsd:boolean ;
+        shacl:result    [
+            rdf:type                         shacl:ValidationResult ;
+            shacl:focusNode                  <https://data.hansehart.de/id/source/example-one> ;
+            shacl:resultPath                 [ shacl:inversePath resourcelist:resource ] ;
+            shacl:resultSeverity             shacl:Violation ;
+            shacl:sourceConstraintComponent  shacl:MaxCountConstraintComponent ;
+            shacl:sourceShape                hansehart:SourceShape-resource
+        ]
+    ] ;
+    manifest:status  shacltest:approved .

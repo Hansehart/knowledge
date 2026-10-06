@@ -10,13 +10,26 @@
 
 <http://zotero.org/users/0/items/AAAAAAAA>
     rdf:type               zotero:UserItem ;
-    resourcelist:resource  <https://data.hansehart.de/id/source/example-one> , <https://data.hansehart.de/id/source/example-two> .
+    resourcelist:resource  <https://data.hansehart.de/id/source/example-one> , <https://data.hansehart.de/id/source/example-three> .
+
+<https://data.hansehart.de/id/source/example-one>
+    zotero:itemType  "journalArticle" .
+
+<https://data.hansehart.de/id/source/example-three>
+    zotero:itemType  "journalArticle" .
+
+<http://zotero.org/users/0/items/BBBBBBBB>
+    rdf:type               zotero:UserItem ;
+    resourcelist:resource  <https://data.hansehart.de/id/source/example-two> .
+
+<https://data.hansehart.de/id/source/example-two>
+    zotero:itemType  "journalArticle" .
 
 <>
     rdf:type          manifest:Manifest ;
-    manifest:entries  ( <two-sources> ) .
+    manifest:entries  ( <maxCount-001> ) .
 
-<two-sources>
+<maxCount-001>
     rdf:type         shacltest:Validate ;
     rdfs:label       "One item points to two sources" ;
     manifest:action  [ shacltest:dataGraph <> ; shacltest:shapesGraph hansehart:shapes ] ;
@@ -31,4 +44,5 @@
             shacl:sourceConstraintComponent  shacl:MaxCountConstraintComponent ;
             shacl:sourceShape                hansehart:UserItemShape-resource
         ]
-    ] .
+    ] ;
+    manifest:status  shacltest:approved .

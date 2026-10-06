@@ -12,20 +12,23 @@
     rdf:type               zotero:UserItem ;
     resourcelist:resource  <https://data.hansehart.de/id/source/example-one> .
 
+<https://data.hansehart.de/id/source/example-one>
+    zotero:itemType  42 .
+
 <http://zotero.org/users/0/items/BBBBBBBB>
     rdf:type               zotero:UserItem ;
-    resourcelist:resource  <https://data.hansehart.de/id/source/example-one> .
+    resourcelist:resource  <https://data.hansehart.de/id/source/example-two> .
 
-<https://data.hansehart.de/id/source/example-one>
+<https://data.hansehart.de/id/source/example-two>
     zotero:itemType  "journalArticle" .
 
 <>
     rdf:type          manifest:Manifest ;
-    manifest:entries  ( <shared-source> ) .
+    manifest:entries  ( <datatype-001> ) .
 
-<shared-source>
+<datatype-001>
     rdf:type         shacltest:Validate ;
-    rdfs:label       "Two items point to the same source" ;
+    rdfs:label       "A source has a kind written as a number" ;
     manifest:action  [ shacltest:dataGraph <> ; shacltest:shapesGraph hansehart:shapes ] ;
     manifest:result  [
         rdf:type        shacl:ValidationReport ;
@@ -33,9 +36,20 @@
         shacl:result    [
             rdf:type                         shacl:ValidationResult ;
             shacl:focusNode                  <https://data.hansehart.de/id/source/example-one> ;
-            shacl:resultPath                 [ shacl:inversePath resourcelist:resource ] ;
+            shacl:resultPath                 zotero:itemType ;
             shacl:resultSeverity             shacl:Violation ;
-            shacl:sourceConstraintComponent  shacl:MaxCountConstraintComponent ;
-            shacl:sourceShape                hansehart:SourceShape-resource
+            shacl:sourceConstraintComponent  shacl:DatatypeConstraintComponent ;
+            shacl:sourceShape                hansehart:SourceShape-itemType ;
+            shacl:value                      42
+        ] ;
+        shacl:result    [
+            rdf:type                         shacl:ValidationResult ;
+            shacl:focusNode                  <https://data.hansehart.de/id/source/example-one> ;
+            shacl:resultPath                 zotero:itemType ;
+            shacl:resultSeverity             shacl:Violation ;
+            shacl:sourceConstraintComponent  shacl:InConstraintComponent ;
+            shacl:sourceShape                hansehart:SourceShape-itemType ;
+            shacl:value                      42
         ]
-    ] .
+    ] ;
+    manifest:status  shacltest:approved .

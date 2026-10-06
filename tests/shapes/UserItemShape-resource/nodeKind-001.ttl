@@ -10,28 +10,42 @@
 
 <http://zotero.org/users/0/items/AAAAAAAA>
     rdf:type               zotero:UserItem ;
-    resourcelist:resource  <https://data.hansehart.de/id/source/example-one> .
+    resourcelist:resource  "example-one" .
 
-<https://data.hansehart.de/id/source/example-one>
-    zotero:itemType  "journalArticle" , "preprint" .
+<http://zotero.org/users/0/items/BBBBBBBB>
+    rdf:type               zotero:UserItem ;
+    resourcelist:resource  <https://data.hansehart.de/id/source/example-two> .
+
+<https://data.hansehart.de/id/source/example-two>
+    zotero:itemType  "journalArticle" .
 
 <>
     rdf:type          manifest:Manifest ;
-    manifest:entries  ( <two-kinds> ) .
+    manifest:entries  ( <nodeKind-001> ) .
 
-<two-kinds>
+<nodeKind-001>
     rdf:type         shacltest:Validate ;
-    rdfs:label       "A source has two kinds" ;
+    rdfs:label       "An item points to a text instead of a name" ;
     manifest:action  [ shacltest:dataGraph <> ; shacltest:shapesGraph hansehart:shapes ] ;
     manifest:result  [
         rdf:type        shacl:ValidationReport ;
         shacl:conforms  "false"^^xsd:boolean ;
         shacl:result    [
             rdf:type                         shacl:ValidationResult ;
-            shacl:focusNode                  <https://data.hansehart.de/id/source/example-one> ;
+            shacl:focusNode                  <http://zotero.org/users/0/items/AAAAAAAA> ;
+            shacl:resultPath                 resourcelist:resource ;
+            shacl:resultSeverity             shacl:Violation ;
+            shacl:sourceConstraintComponent  shacl:NodeKindConstraintComponent ;
+            shacl:sourceShape                hansehart:UserItemShape-resource ;
+            shacl:value                      "example-one"
+        ] ;
+        shacl:result    [
+            rdf:type                         shacl:ValidationResult ;
+            shacl:focusNode                  "example-one" ;
             shacl:resultPath                 zotero:itemType ;
             shacl:resultSeverity             shacl:Violation ;
-            shacl:sourceConstraintComponent  shacl:MaxCountConstraintComponent ;
+            shacl:sourceConstraintComponent  shacl:MinCountConstraintComponent ;
             shacl:sourceShape                hansehart:SourceShape-itemType
         ]
-    ] .
+    ] ;
+    manifest:status  shacltest:approved .

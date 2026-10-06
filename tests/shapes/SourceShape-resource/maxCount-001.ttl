@@ -12,13 +12,27 @@
     rdf:type               zotero:UserItem ;
     resourcelist:resource  <https://data.hansehart.de/id/source/example-one> .
 
+<http://zotero.org/users/0/items/CCCCCCCC>
+    rdf:type               zotero:UserItem ;
+    resourcelist:resource  <https://data.hansehart.de/id/source/example-one> .
+
+<https://data.hansehart.de/id/source/example-one>
+    zotero:itemType  "journalArticle" .
+
+<http://zotero.org/users/0/items/BBBBBBBB>
+    rdf:type               zotero:UserItem ;
+    resourcelist:resource  <https://data.hansehart.de/id/source/example-two> .
+
+<https://data.hansehart.de/id/source/example-two>
+    zotero:itemType  "journalArticle" .
+
 <>
     rdf:type          manifest:Manifest ;
-    manifest:entries  ( <no-kind> ) .
+    manifest:entries  ( <maxCount-001> ) .
 
-<no-kind>
+<maxCount-001>
     rdf:type         shacltest:Validate ;
-    rdfs:label       "A source has no kind" ;
+    rdfs:label       "Two items point to the same source" ;
     manifest:action  [ shacltest:dataGraph <> ; shacltest:shapesGraph hansehart:shapes ] ;
     manifest:result  [
         rdf:type        shacl:ValidationReport ;
@@ -26,9 +40,10 @@
         shacl:result    [
             rdf:type                         shacl:ValidationResult ;
             shacl:focusNode                  <https://data.hansehart.de/id/source/example-one> ;
-            shacl:resultPath                 zotero:itemType ;
+            shacl:resultPath                 [ shacl:inversePath resourcelist:resource ] ;
             shacl:resultSeverity             shacl:Violation ;
-            shacl:sourceConstraintComponent  shacl:MinCountConstraintComponent ;
-            shacl:sourceShape                hansehart:SourceShape-itemType
+            shacl:sourceConstraintComponent  shacl:MaxCountConstraintComponent ;
+            shacl:sourceShape                hansehart:SourceShape-resource
         ]
-    ] .
+    ] ;
+    manifest:status  shacltest:approved .

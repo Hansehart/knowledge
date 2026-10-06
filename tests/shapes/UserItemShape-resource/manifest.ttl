@@ -4,5 +4,5 @@
 
 <>
     rdf:type          manifest:Manifest ;
-    rdfs:label        "Rules for sources and Zotero items" ;
-    manifest:include  <SourceShape-itemType/manifest.ttl> , <SourceShape-resource/manifest.ttl> , <UserItemShape-resource/manifest.ttl> .
+    rdfs:label        "Rule for the source a Zotero item points to" ;
+    manifest:include  <maxCount-001.ttl> , <minCount-001.ttl> , <nodeKind-001.ttl> .

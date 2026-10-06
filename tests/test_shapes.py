@@ -32,23 +32,24 @@ def load(location: term.Node | None) -> rdflib.Graph:
     return rdflib.Graph().parse(str(location), format="turtle")
 
 
-def collect() -> list[tuple[rdflib.Graph, term.Node]]:
-    """Collect every case the manifest includes.
+def collect(location: term.Node) -> list[tuple[rdflib.Graph, term.Node]]:
+    """Collect every case of a manifest and of the manifests it includes.
+
+    Args:
+        location: Where the manifest is.
 
     Returns:
         One pair per case, the graph that describes it and the case itself.
     """
-    manifest = load(rdflib.URIRef((pathlib.Path(__file__).parent / "shapes" / "manifest.ttl").as_uri()))
-    return [
-        (tests, entry)
-        for include in sorted(manifest.objects(None, MANIFEST.include), key=str)
-        for tests in [load(include)]
-        for entries in tests.objects(None, MANIFEST.entries)
-        for entry in collection.Collection(tests, entries)
+    tests = load(location)
+    own = [
+        (tests, entry) for entries in tests.objects(None, MANIFEST.entries) for entry in collection.Collection(tests, entries)
     ]
+    included = [case for include in sorted(tests.objects(None, MANIFEST.include), key=str) for case in collect(include)]
+    return own + included
 
 
-CASES = collect()
+CASES = collect(rdflib.URIRef((pathlib.Path(__file__).parent / "shapes" / "manifest.ttl").as_uri()))
 
 
 @pytest.mark.parametrize(("tests", "entry"), CASES, ids=[str(tests.value(entry, rdflib.RDFS.label)) for tests, entry in CASES])

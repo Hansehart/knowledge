@@ -9,22 +9,22 @@
 @prefix zotero:       <http://www.zotero.org/namespaces/export#> .
 
 <http://zotero.org/users/0/items/AAAAAAAA>
-    rdf:type               zotero:UserItem ;
-    resourcelist:resource  <https://data.hansehart.de/id/source/example-one> , <https://data.hansehart.de/id/source/example-two> .
+    rdf:type               zotero:UserItem .
 
-<https://data.hansehart.de/id/source/example-one>
-    zotero:itemType  "journalArticle" .
+<http://zotero.org/users/0/items/BBBBBBBB>
+    rdf:type               zotero:UserItem ;
+    resourcelist:resource  <https://data.hansehart.de/id/source/example-two> .
 
 <https://data.hansehart.de/id/source/example-two>
     zotero:itemType  "journalArticle" .
 
 <>
     rdf:type          manifest:Manifest ;
-    manifest:entries  ( <two-sources> ) .
+    manifest:entries  ( <minCount-001> ) .
 
-<two-sources>
+<minCount-001>
     rdf:type         shacltest:Validate ;
-    rdfs:label       "One item points to two sources" ;
+    rdfs:label       "An item points to no source" ;
     manifest:action  [ shacltest:dataGraph <> ; shacltest:shapesGraph hansehart:shapes ] ;
     manifest:result  [
         rdf:type        shacl:ValidationReport ;
@@ -34,7 +34,8 @@
             shacl:focusNode                  <http://zotero.org/users/0/items/AAAAAAAA> ;
             shacl:resultPath                 resourcelist:resource ;
             shacl:resultSeverity             shacl:Violation ;
-            shacl:sourceConstraintComponent  shacl:MaxCountConstraintComponent ;
+            shacl:sourceConstraintComponent  shacl:MinCountConstraintComponent ;
             shacl:sourceShape                hansehart:UserItemShape-resource
         ]
-    ] .
+    ] ;
+    manifest:status  shacltest:approved .

@@ -82,9 +82,7 @@ cache_dir = ".cache/mypy"
 warn_unused_configs = true
 
 [tool.pytest]
-# importlib keeps sys.path untouched, so a test module's name comes from its path and
-# two directories may hold files of the same name
-addopts = [ "--import-mode=importlib" ]
+addopts = [ "--import-mode=importlib" ]  # tests load by their full path, so files of the same name live in different folders
 cache_dir = ".cache/pytest"
 strict = true
 testpaths = [ "tests" ]

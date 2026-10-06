@@ -12,6 +12,12 @@
     rdf:type               zotero:UserItem ;
     resourcelist:resource  <https://data.hansehart.de/id/source/example-one> , <https://data.hansehart.de/id/source/example-two> .
 
+<https://data.hansehart.de/id/source/example-one>
+    zotero:itemType  "journalArticle" .
+
+<https://data.hansehart.de/id/source/example-two>
+    zotero:itemType  "journalArticle" .
+
 <>
     rdf:type          manifest:Manifest ;
     manifest:entries  ( <two-sources> ) .

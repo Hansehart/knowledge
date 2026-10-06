@@ -4,6 +4,7 @@
 @prefix rdf:          <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix resourcelist: <http://purl.org/vocab/resourcelist/schema#> .
 @prefix shacl:        <http://www.w3.org/ns/shacl#> .
+@prefix xsd:          <http://www.w3.org/2001/XMLSchema#> .
 @prefix zotero:       <http://www.zotero.org/namespaces/export#> .
 
 # A set of rules that applies to every Zotero item.
@@ -24,7 +25,30 @@ hansehart:UserItemShape-resource
 hansehart:SourceShape
     rdf:type               shacl:NodeShape ;
     shacl:targetObjectsOf  resourcelist:resource ;
-    shacl:property         hansehart:SourceShape-resource .
+    shacl:property         hansehart:SourceShape-itemType , hansehart:SourceShape-resource .
+
+# A source is of exactly one kind, named as Zotero names it.
+hansehart:SourceShape-itemType
+    rdf:type        shacl:PropertyShape ;
+    shacl:path      zotero:itemType ;
+    shacl:datatype  xsd:string ;
+    shacl:minCount  1 ;
+    shacl:maxCount  1 ;
+    shacl:in        (
+        "blogPost"
+        "book"
+        "bookSection"
+        "computerProgram"
+        "conferencePaper"
+        "dataset"
+        "forumPost"
+        "journalArticle"
+        "magazineArticle"
+        "preprint"
+        "report"
+        "standard"
+        "webpage"
+    ) .
 
 # A source is pointed to by exactly one Zotero item.
 hansehart:SourceShape-resource

@@ -60,8 +60,8 @@ skip_wrap_for_keys = [ "*.notice-rgx" ]
 
 [tool.mypy]
 files = [ "src", "tests" ]
-disallow_any_unimported = true  # Any arriving from a module whose stubs are missing
-disallow_any_explicit = true  # Any written out where a type could say what it holds
+disallow_any_unimported = true
+disallow_any_explicit = true
 warn_unreachable = true
 enable_error_code = [
     "deprecated",          # use of a @deprecated API

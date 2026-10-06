@@ -64,18 +64,18 @@ disallow_any_unimported = true
 disallow_any_explicit = true
 warn_unreachable = true
 enable_error_code = [
-    "deprecated",          # use of a @deprecated API
-    "exhaustive-match",    # a match that leaves a case unhandled
-    "explicit-override",   # an override that omits @override
-    "ignore-without-code", # a `# type: ignore` missing its error code
-    "mutable-override",    # a mutable attribute overriding an immutable one
-    "possibly-undefined",  # a variable that some path leaves unset
-    "redundant-expr",      # an expression whose value is already settled
-    "redundant-self",      # a Self annotation the signature already implies
-    "truthy-bool",         # a condition that is always true
-    "truthy-iterable",     # an Iterable in a condition, which a generator makes always true
-    "unimported-reveal",   # a reveal_type left behind from debugging
-    "unused-awaitable",    # an awaitable whose result is dropped
+    "deprecated",          # a call to code its authors marked as outdated
+    "exhaustive-match",    # a case analysis that misses one of the possible values
+    "explicit-override",   # a method that replaces an inherited one without marking it
+    "ignore-without-code", # a silencing comment that hides every error on its line instead of one named error
+    "mutable-override",    # a writable attribute replacing a read-only one from the parent class
+    "possibly-undefined",  # a variable that one branch of the code assigns and another skips
+    "redundant-expr",      # a condition whose outcome is known before the code runs
+    "redundant-self",      # a type hint for the instance that the method already implies
+    "truthy-bool",         # an object in a yes-or-no test that always counts as yes
+    "truthy-iterable",     # a collection in a yes-or-no test that may be a generator, which always counts as yes
+    "unimported-reveal",   # a debugging call that prints a type, left in the code
+    "unused-awaitable",    # an asynchronous call whose result goes nowhere
 ]
 strict = true
 cache_dir = ".cache/mypy"

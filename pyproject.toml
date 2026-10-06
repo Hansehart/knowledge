@@ -60,9 +60,6 @@ skip_wrap_for_keys = [ "*.notice-rgx" ]
 
 [tool.mypy]
 files = [ "src", "tests" ]
-strict = true
-cache_dir = ".cache/mypy"
-# Group: checks beyond strict, each switched on by its own setting
 disallow_any_unimported = true  # Any arriving from a module whose stubs are missing
 disallow_any_explicit = true  # Any written out where a type could say what it holds
 warn_unreachable = true
@@ -80,6 +77,8 @@ enable_error_code = [
     "unimported-reveal",   # a reveal_type left behind from debugging
     "unused-awaitable",    # an awaitable whose result is dropped
 ]
+strict = true
+cache_dir = ".cache/mypy"
 warn_unused_configs = true
 
 [tool.pytest]

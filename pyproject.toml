@@ -1,0 +1,88 @@
+[build-system]
+build-backend = "uv_build"
+requires = [ "uv-build>=0.12.17,<0.13" ]
+
+[project]
+name = "knowledge"
+version = "0.1.0"
+description = "Turn any kind of source into connected and typed knowledge"
+readme = "README.md"
+license = "MIT"
+license-files = [ "LICENSE" ]
+authors = [ { name = "Hansehart", email = "97880342+Hansehart@users.noreply.github.com" } ]
+requires-python = ">=3.13"
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Typing :: Typed",
+]
+dependencies = [
+    "pyshacl==0.40.1",
+    "rdflib==7.6",
+]
+scripts.knowledge = "knowledge.cli:main"
+
+[dependency-groups]
+dev = [
+    "mypy==2.3.1",
+    "pre-commit==4.6.2",
+    "pytest==9.1.1",
+    "ruff==0.16.8",
+    "validate-pyproject[all]==0.26",
+    "validate-pyproject-schema-store==2026.10.2",
+]
+
+[tool.uv]
+required-version = ">=0.12.17,<0.13"
+
+[tool.ruff]
+line-length = 128
+cache-dir = ".cache/ruff"
+format.docstring-code-format = true
+lint.select = [ "ALL" ]
+lint.extend-select = [ "D400", "D401", "D404" ]  # Google style, narrowed to one form wherever it allows several
+lint.ignore = [ "COM812" ]  # the formatter already decides trailing commas
+lint.per-file-ignores."tests/**" = [ "INP001", "S101" ]  # tests are imported by their path and use asserts
+lint.flake8-copyright.notice-rgx = "SPDX-FileCopyrightText: Copyright \\(c\\) \\d{4} Hansehart\\n# SPDX-License-Identifier: MIT\\n\\n"
+lint.pydocstyle.convention = "google"  # curates the D-rule subset, D203 and D213 among them
+
+[tool.pyproject-fmt]
+column_width = 128
+indent = 4
+max_supported_python = "3.13"
+skip_wrap_for_keys = [ "*.notice-rgx" ]
+
+[tool.mypy]
+files = [ "src", "tests" ]
+disallow_any_unimported = true
+disallow_any_explicit = true
+warn_unreachable = true
+enable_error_code = [
+    "deprecated",          # a call to code its authors marked as outdated
+    "exhaustive-match",    # a case analysis that misses one of the possible values
+    "explicit-override",   # a method that replaces an inherited one without marking it
+    "ignore-without-code", # a silencing comment that hides every error on its line instead of one named error
+    "mutable-override",    # a writable attribute replacing a read-only one from the parent class
+    "possibly-undefined",  # a variable that one branch of the code assigns and another skips
+    "redundant-expr",      # a condition whose outcome is known before the code runs
+    "redundant-self",      # a type hint for the instance that the method already implies
+    "truthy-bool",         # an object in a yes-or-no test that always counts as yes
+    "truthy-iterable",     # a collection in a yes-or-no test that may be a generator, which always counts as yes
+    "unimported-reveal",   # a debugging call that prints a type, left in the code
+    "unused-awaitable",    # an asynchronous call whose result goes nowhere
+]
+strict = true
+cache_dir = ".cache/mypy"
+warn_unused_configs = true
+
+[tool.pytest]
+addopts = [ "--import-mode=importlib" ]  # tests load by their full path, so files of the same name live in different folders
+cache_dir = ".cache/pytest"
+strict = true
+testpaths = [ "tests" ]

@@ -1,0 +1,8 @@
+@prefix manifest: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+
+<>
+    rdf:type          manifest:Manifest ;
+    rdfs:label        "Rules for sources and Zotero items" ;
+    manifest:include  <no-source.ttl> , <one-source.ttl> , <shared-source.ttl> , <two-sources.ttl> .

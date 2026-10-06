@@ -43,3 +43,11 @@ the repository by walking up from where it was run, looking for `knowledge/confi
 | `knowledge/model/topics.ttl` | SKOS | the controlled vocabulary that tags the sources |
 | `knowledge/model/terms.ttl` | SKOS | the vocabulary and acronyms its sources use |
 | `knowledge/zotero/library.json` | Zotero | a backup of every source and its metadata |
+| `knowledge/zotero/collections.json` | Zotero | a backup of how the library is organised |
+| `knowledge/zotero/governance.yml` | N/A | the rules the library follows |
+
+## Development
+Run once per clone, so every commit is checked first.
+```shell
+uv run pre-commit install --install-hooks
+```

@@ -1,0 +1,55 @@
+fail_fast: true
+
+repos:
+  # Checks for every file and commit, whatever the language.
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: no-commit-to-branch
+      - id: trailing-whitespace
+
+  # The project file, written in one canonical order.
+  - repo: https://github.com/tox-dev/pyproject-fmt
+    rev: 831e544b60ed0c00a8dc7932528790dc8b410fac  # frozen: v2.30.0
+    hooks:
+      - id: pyproject-fmt
+
+  # Checks at the versions pinned with the project, so each tool has one source of truth.
+  - repo: local
+    hooks:
+      - id: uv-lock
+        name: uv lock
+        entry: uv lock --check
+        language: unsupported
+        pass_filenames: false
+
+      - id: validate-pyproject
+        name: validate-pyproject
+        entry: uv run validate-pyproject pyproject.toml
+        language: unsupported
+        files: ^(pyproject\.toml|uv\.lock)$
+        pass_filenames: false
+
+      - id: ruff-check
+        name: ruff check
+        entry: uv run ruff check --fix
+        language: unsupported
+        pass_filenames: false
+
+      - id: ruff-format
+        name: ruff format
+        entry: uv run ruff format
+        language: unsupported
+        pass_filenames: false
+
+      - id: mypy
+        name: mypy
+        entry: uv run mypy
+        language: unsupported
+        pass_filenames: false

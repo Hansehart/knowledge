@@ -1,6 +1,6 @@
 [build-system]
 build-backend = "uv_build"
-requires = [ "uv-build>=0.12.17,<0.13.0" ]
+requires = [ "uv-build>=0.12.17,<0.13" ]
 
 [project]
 name = "knowledge"
@@ -24,7 +24,7 @@ classifiers = [
 ]
 dependencies = [
     "pyshacl==0.40.1",
-    "rdflib==7.6.0",
+    "rdflib==7.6",
 ]
 scripts.knowledge = "knowledge.cli:main"
 
@@ -55,7 +55,6 @@ lint.pydocstyle.convention = "google"  # curates the D-rule subset, D203 and D21
 [tool.pyproject-fmt]
 column_width = 128
 indent = 4
-keep_full_version = true
 max_supported_python = "3.13"
 skip_wrap_for_keys = [ "*.notice-rgx" ]
 
